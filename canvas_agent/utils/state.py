@@ -4,12 +4,7 @@ from typing import List, Dict, Literal, TypedDict, Optional
 class SlideOutline(TypedDict):
     """单页幻灯片的结构化大纲"""
     page: int
-    title: str
-    type: str
-    key_points: List[str]
-    content_summary: Optional[str]
-    visual_suggestion: Optional[str]
-    notes: Optional[str]
+    content: str
 
 
 class GraphState(TypedDict):

@@ -21,16 +21,18 @@ def outline_generator(state: GraphState) -> GraphState:
 [
   {{
     "page": 1,
-    "title": "标题",
-    "type": "content",
-    "key_points": ["要点1", "要点2"]
+    "content": "第一页的完整内容描述，包括标题、要点、详细说明等所有文本内容"
+  }},
+  {{
+    "page": 2,
+    "content": "第二页的完整内容描述..."
   }}
 ]
 
 要求：
-1. type只能是"content"或"centered"
-2. 每页包含2-4个key_points
-3. 内容要符合主题"{state['original_query']}"
+1. content字段包含该页的完整内容描述，以自由文本形式
+2. 内容要符合主题"{state['original_query']}"
+3. 每页content要详细具体，避免空泛描述
 4. 直接返回JSON数组，不要其他文字
 """
 
@@ -65,33 +67,43 @@ def outline_generator(state: GraphState) -> GraphState:
         
         # 提取大纲列表（处理可能的不同响应格式）
         if isinstance(outline_data, list):
+            # 标准格式：直接是数组
             outline_list = outline_data
-        elif 'outline' in outline_data:
-            outline_list = outline_data['outline']
-        elif 'slides' in outline_data:
-            outline_list = outline_data['slides']
+        elif isinstance(outline_data, dict):
+            # 检查是否包含常见的键
+            if 'outline' in outline_data and isinstance(outline_data['outline'], list):
+                outline_list = outline_data['outline']
+            elif 'slides' in outline_data and isinstance(outline_data['slides'], list):
+                outline_list = outline_data['slides']
+            else:
+                # 尝试找到第一个列表值
+                outline_list = None
+                for value in outline_data.values():
+                    if isinstance(value, list):
+                        outline_list = value
+                        break
+                
+                # 如果还是找不到列表，可能是单个slide对象，尝试转换为列表
+                if outline_list is None:
+                    # 检查是否是单个slide对象（包含page, title等字段）
+                    if 'page' in outline_data or 'title' in outline_data:
+                        outline_list = [outline_data]
+                    else:
+                        raise ValueError("无法从AI响应中提取大纲列表")
         else:
-            # 如果结构不符合预期，尝试找到第一个列表值
-            outline_list = None
-            for value in outline_data.values():
-                if isinstance(value, list):
-                    outline_list = value
-                    break
-            
-            if outline_list is None:
-                raise ValueError("无法从AI响应中提取大纲列表")
+            raise ValueError("AI响应格式不正确：必须是对象或数组")
         
         # 验证和标准化大纲格式
         validated_outline = []
         for i, slide in enumerate(outline_list[:state['slide_count']]):  # 确保不超过指定页数
+            # 确保slide是字典类型
+            if not isinstance(slide, dict):
+                print(f"[Warning]: 第{i+1}页数据格式不正确，跳过: {slide}")
+                continue
+                
             validated_slide: SlideOutline = {
                 "page": slide.get("page", i + 1),
-                "title": slide.get("title", f"第{i+1}页"),
-                "type": slide.get("type", "content_slide"),
-                "key_points": slide.get("key_points", []),
-                "content_summary": slide.get("content_summary"),
-                "visual_suggestion": slide.get("visual_suggestion"),
-                "notes": slide.get("notes")
+                "content": slide.get("content", f"第{i+1}页的内容")
             }
             validated_outline.append(validated_slide)
         
@@ -100,12 +112,7 @@ def outline_generator(state: GraphState) -> GraphState:
             page_num = len(validated_outline) + 1
             validated_outline.append({
                 "page": page_num,
-                "title": f"第{page_num}页",
-                "type": "content_slide",
-                "key_points": [f"第{page_num}页的关键内容"],
-                "content_summary": None,
-                "visual_suggestion": None,
-                "notes": None
+                "content": f"第{page_num}页的内容"
             })
         
         state["outline"] = validated_outline
@@ -121,12 +128,7 @@ def outline_generator(state: GraphState) -> GraphState:
         # 显示大纲预览
         print("\n=== 大纲预览 ===")
         for slide in validated_outline:
-            print(f"第{slide['page']}页: {slide['title']} ({slide['type']})")
-            if slide['key_points']:
-                for point in slide['key_points'][:2]:  # 只显示前两个要点
-                    print(f"  - {point}")
-                if len(slide['key_points']) > 2:
-                    print(f"  - (还有{len(slide['key_points'])-2}个要点...)")
+            print(f"第{slide['page']}页: {slide['content'][:50]}...")
         print("================\n")
         
     except Exception as e:
@@ -136,12 +138,7 @@ def outline_generator(state: GraphState) -> GraphState:
         for i in range(state['slide_count']):
             default_outline.append({
                 "page": i + 1,
-                "title": f"第{i+1}页",
-                "type": "content",  # 修正type为支持的类型
-                "key_points": [f"第{i+1}页的关键内容"],
-                "content_summary": None,
-                "visual_suggestion": None,
-                "notes": None
+                "content": f"第{i+1}页的内容"
             })
         state["outline"] = default_outline
         

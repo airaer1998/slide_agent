@@ -37,7 +37,7 @@ def interactive_slide_generator(state: GraphState) -> GraphState:
         current_slide = state["outline"][current_index]
         
         print(f"\n[Agent]: ---")
-        print(f"[Agent]: 正在生成第 {current_index + 1}/{total_slides} 页: \"{current_slide['title']}\"... ✨")
+        print(f"[Agent]: 正在生成第 {current_index + 1}/{total_slides} 页... ✨")
         
         # 生成当前页内容
         slide_content = generate_single_slide(client, state, current_index)
@@ -98,17 +98,8 @@ def generate_single_slide(client: OpenAI, state: GraphState, slide_index: int) -
 
 ## 当前页信息
 - 页码: {current_slide['page']}
-- 标题: {current_slide['title']}
-- 类型: {current_slide['type']}
-- 关键要点: {', '.join(current_slide['key_points'])}
+- 内容描述: {current_slide['content']}
 """
-    
-    if current_slide.get('content_summary'):
-        prompt += f"- 内容摘要: {current_slide['content_summary']}\n"
-    if current_slide.get('visual_suggestion'):
-        prompt += f"- 视觉建议: {current_slide['visual_suggestion']}\n"
-    if current_slide.get('notes'):
-        prompt += f"- 备注: {current_slide['notes']}\n"
     
     # 如果有用户反馈，加入修改要求
     if state["user_feedback"]:
@@ -152,9 +143,9 @@ def generate_single_slide(client: OpenAI, state: GraphState, slide_index: int) -
     except Exception as e:
         print(f"[Error]: 生成第 {slide_index + 1} 页时出错: {str(e)}")
         # 返回基本内容
-        return f"""## {current_slide['title']}
+        return f"""## 第{slide_index + 1}页
 
-{chr(10).join(f"- {point}" for point in current_slide['key_points'])}"""
+{current_slide['content']}"""
 
 
 def wait_for_user_feedback(state: GraphState) -> bool:
@@ -203,6 +194,10 @@ def start_moffee_preview(filename: str):
     启动moffee实时预览
     """
     try:
+        # 检查并清理已有的moffee进程
+        print("[Agent]: 正在检查并清理moffee进程...")
+        subprocess.run(["pkill", "-f", "moffee live"], timeout=5)
+        
         # 检查moffee是否可用
         result = subprocess.run(['moffee', '--version'], 
                               capture_output=True, text=True, timeout=5)

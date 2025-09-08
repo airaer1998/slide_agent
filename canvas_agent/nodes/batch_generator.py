@@ -63,17 +63,9 @@ def build_batch_prompt(state: GraphState) -> str:
     outline_text = ""
     for i, slide in enumerate(state["outline"]):
         outline_text += f"""
-第{slide['page']}页:
-- 标题: {slide['title']}
-- 类型: {slide['type']}
-- 关键要点: {', '.join(slide['key_points'])}
+第{slide['page']}页: {slide['content']}
+
 """
-        if slide.get('content_summary'):
-            outline_text += f"- 内容摘要: {slide['content_summary']}\n"
-        if slide.get('visual_suggestion'):
-            outline_text += f"- 视觉建议: {slide['visual_suggestion']}\n"
-        if slide.get('notes'):
-            outline_text += f"- 备注: {slide['notes']}\n"
     
     prompt = f"""
 请根据以下大纲和规则，生成完整的Moffee Markdown课件内容。
@@ -120,13 +112,10 @@ aspect_ratio: "16:9"
     for slide in state["outline"]:
         content += f"""---
 
-## {slide['title']}
+## 第{slide['page']}页
+
+{slide['content']}
 
 """
-        for point in slide['key_points']:
-            content += f"- {point}\n"
-        
-        if slide.get('content_summary'):
-            content += f"\n{slide['content_summary']}\n"
     
     return content
