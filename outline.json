@@ -1,0 +1,54 @@
+[
+  {
+    "page": 1,
+    "title": "Python基础介绍",
+    "type": "content",
+    "key_points": [
+      "Python简介与历史",
+      "安装与环境配置",
+      "第一个Python程序：Hello, World!"
+    ],
+    "content_summary": null,
+    "visual_suggestion": null,
+    "notes": null
+  },
+  {
+    "page": 2,
+    "title": "基本语法与数据类型",
+    "type": "content",
+    "key_points": [
+      "变量与标识符规则",
+      "数值、字符串、布尔类型",
+      "类型转换与内置函数"
+    ],
+    "content_summary": null,
+    "visual_suggestion": null,
+    "notes": null
+  },
+  {
+    "page": 3,
+    "title": "控制流程",
+    "type": "content",
+    "key_points": [
+      "条件语句：if/elif/else",
+      "循环语句：for与while",
+      "break、continue与pass"
+    ],
+    "content_summary": null,
+    "visual_suggestion": null,
+    "notes": null
+  },
+  {
+    "page": 4,
+    "title": "函数与模块",
+    "type": "content",
+    "key_points": [
+      "函数定义与调用",
+      "参数、返回值与作用域",
+      "标准库模块与import"
+    ],
+    "content_summary": null,
+    "visual_suggestion": null,
+    "notes": null
+  }
+]
