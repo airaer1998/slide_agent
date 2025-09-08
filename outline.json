@@ -44,8 +44,7 @@
     "type": "content",
     "key_points": [
       "函数定义与调用",
-      "参数、返回值与作用域",
-      "标准库模块与import"
+      "参数、返回值与作用域"
     ],
     "content_summary": null,
     "visual_suggestion": null,
