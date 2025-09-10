@@ -48,6 +48,13 @@
     flex-shrink: 0;
 }
 
+/* 确保centered布局也使用正确高度 */
+.slide-with-images .slide-content.centered {
+    width: var(--slide-width);
+    height: var(--content-height);
+    flex-shrink: 0;
+}
+
 /* 底部图片样式 */
 .footer-image {
     width: var(--slide-width);
@@ -87,4 +94,9 @@ blockquote {
 
 .centered h2 {
     color: rgb(77, 77, 77);
+}
+
+/* 隐藏页码 */
+.slide-number {
+    display: none !important;
 }
