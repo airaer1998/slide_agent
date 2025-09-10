@@ -1,22 +1,18 @@
 [
   {
     "page": 1,
-    "content": "标题：Python基础入门导论  \n副标题：从零开始认识Python  \n要点一：Python是什么——解释型、跨平台、开源的高级编程语言，由Guido van Rossum于1991年发布，以简洁优雅著称，广泛应用于Web开发、数据分析、人工智能等领域。  \n要点二：Python特点——语法接近自然语言；拥有丰富标准库(urllib、json、datetime等)；动态类型无需显式声明；支持面向对象、函数式与过程式混合编程；社区活跃，第三方包超40万个。  \n要点三：运行环境——Windows/Mac/Linux均可；官网下载安装包或Anaconda发行版；终端输入python或python3进入REPL交互模式；推荐使用VS Code或PyCharm集成开发环境，插件丰富，调试直观。  \n实例演示：在REPL中输入print(\"Hello, Python!\")并回车，立即看到输出，无需编译过程，体现“写一行、跑一行”的交互式优势。"
+    "content": "标题：从零开始认识Python\n要点1：什么是Python\n- 由Guido van Rossum于1991年发布的高层次、解释型、通用编程语言\n- 特点：语法简洁、可读性高、跨平台、拥有庞大生态\n- 典型应用场景：数据分析、Web后端、自动化脚本、人工智能、物联网\n\n要点2：安装运行环境\n- 官方解释器CPython：到python.org下载对应操作系统的3.x版本，勾选“Add to PATH”\n- 验证安装：在终端输入python --version，出现Python 3.x.x表示成功\n- 交互式REPL：直接输入python进入>>>提示符，可立即执行单行代码\n- 集成开发环境推荐：VS Code + Python扩展、PyCharm Community、Jupyter Notebook\n\n要点3：第一个Python程序\n- 打开VS Code，新建hello.py，输入print(\"Hello, Python!\")\n- 终端运行：python hello.py，看到终端输出Hello, Python!\n- 解释执行流程：源代码→解释器逐行编译为字节码→Python虚拟机运行→输出结果"
   },
   {
     "page": 2,
-    "content": "标题：变量与数据类型  \n要点一：变量命名——由字母/数字/下划线组成，区分大小写，不能以数字开头；遵循snake_case风格，如student_name；避免使用保留字(if、class、for等)。  \n要点二：数字类型——int(42)、float(3.14)、complex(2+3j)三种；支持+ - * / // % **运算；整数无大小限制，浮点遵循IEEE 754。  \n要点三：字符串——使用单引号、双引号、三引号创建，可嵌套；支持索引s[0]、切片s[1:4]、拼接+、重复*、格式化f\"{name}\"；转义字符\\n \\t \\\\。  \n要点四：布尔与空值——bool仅True、False，可参与and/or/not逻辑运算；NoneType表示空值，常用于函数无返回值占位。  \n要点五：类型转换——int('42')、str(3.14)、float('3.14')，转换失败抛ValueError。示例：name = 'Alice'; age = 18; intro = f'{name} is {age} years old.'"
+    "content": "第2页的内容"
   },
   {
     "page": 3,
-    "content": "标题：控制流与循环  \n要点一：条件语句——if、elif、else结构；条件表达式可链式比较1 <= x < 10；缩进4空格强制，体现代码块层级。  \n要点二：while循环——先判断后执行，避免死循环需更新循环变量；示例：count = 0; while count < 5: print(count); count += 1。  \n要点三：for循环——基于可迭代对象，常与range()配合；range(start, stop, step)左闭右开；支持else子句，循环未被break中断时执行。  \n要点四：break与continue——break立即跳出最近循环；continue跳过本次剩余语句；两者仅在循环体内有效。  \n综合案例：打印2~50之间所有素数；外层for遍历数字，内层for检查除数，若发现因子则continue，循环正常结束则else打印素数。"
+    "content": "第3页的内容"
   },
   {
     "page": 4,
-    "content": "标题：函数与模块  \n要点一：定义函数——使用def关键字，后跟函数名与括号参数列表；可选文档字符串docstring描述功能；使用return返回值，无return则返回None。  \n要点二：参数机制——位置参数、默认参数def greet(name, msg='Hi')、关键字参数greet(msg='Hello', name='Bob')；可变参数*args收集元组、**kwargs收集字典。  \n要点三：作用域——局部变量仅在函数内有效；global声明修改外部变量；LEGB规则(Local, Enclosing, Global, Built-in)查找变量。  \n要点四：模块导入——import math使用math.sqrt；from math import sqrt as s；自定义文件hello.py中定义函数，主程序import hello后调用hello.say()。  \n要点五：标准库速览——math(数学)、random(随机)、datetime(日期)、os(操作系统)、json(序列化)；查看帮助help(math)或官方文档。"
-  },
-  {
-    "page": 5,
-    "content": "标题：列表、元组与字典  \n要点一：列表list——有序可变序列，用[]创建；支持append、insert、pop、remove、sort、reverse方法；列表推导式[x**2 for x in range(5)]简洁生成新列表。  \n要点二：元组tuple——有序不可变序列，用()创建；单元素需加逗号(42,)；拆包a, b = (1, 2)；函数返回多值时自动打包成元组。  \n要点三：字典dict——键值对集合，无序可变，用{}创建；键须可哈希(字符串、数字、元组)；访问dict['key']、get('key', default)；新增dict['new']=100；遍历for k, v in dict.items()。  \n要点四：集合set——无序不重复元素，用{}或set()创建；支持并|、交&、差-运算；用于去重list(set([1,2,2,3]))。  \n实践任务：使用列表存储学生成绩，元组保存姓名与学号不可变信息，字典将学号映射到成绩，最后计算平均分并打印最高成绩学生信息。"
+    "content": "第4页的内容"
   }
 ]

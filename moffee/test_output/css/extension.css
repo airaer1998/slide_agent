@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --color-admonition-bg: hsl(0, 0%, 70%);
+    --color-admonition-fg: hsl(0, 0%, 20%);
+    --colour-warning-bg: hsl(28.5, 74%, 70%);
+    --colour-warning-fg: hsl(28.5, 74%, 20%);
+    --colour-note-bg: hsl(219.5, 84%, 70%);
+    --colour-note-fg: hsl(219.5, 84%, 20%);
+    --colour-success-bg: hsl(150, 36.7%, 70%);
+    --colour-success-fg: hsl(150, 36.7%, 20%);
+    --colour-error-bg: hsl(0, 37%, 70%);
+    --colour-error-fg: hsl(0, 37%, 20%);
+    --colour-todo-bg: hsl(266.8, 100%, 70%);
+    --colour-todo-fg: hsl(266.8, 100%, 20%);
+    --color-beamer-blue: #164994;
+    --color-beamer-dark: #0B244A;
+    
+    /* Fixed slide dimensions */
+    --slide-width: 1280px;
+    --slide-height: 720px;
+    --header-height: 116px;
+    --footer-height: 116px;
+    --content-height: calc(var(--slide-height) - var(--header-height) - var(--footer-height));
+}
+
+/* Fixed slide container */
+.slide-content {
+    width: var(--slide-width) !important;
+    height: var(--slide-height) !important;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: white;
+}
+
+/* Header image positioning */
+.header-image {
+    width: 100%;
+    height: var(--header-height);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.header-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Main content area */
+.main-content {
+    flex: 1;
+    height: var(--content-height);
+    padding: 20px 40px;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Footer image positioning */
+.footer-image {
+    width: 100%;
+    height: var(--footer-height);
+    position: relative;
+    flex-shrink: 0;
+}
+
+.footer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Slide number positioned over footer */
+.slide-number {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.slide-number p {
+    margin: 0;
+}
+
+/* Typography from beam template */
+body {
+    font-family: "Noto Serif", "Georgia", "SimSun", "STSong", "NSimSun", "PMingLiU", "MingLiU", serif;
+}
+
+/* Centered layout adjustments */
+.centered .main-content {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.centered h1 {
+    padding: 20px;
+    font-size: 2rem;
+    background: var(--color-beamer-blue);
+    color: white;
+    margin: 0 auto 20px auto;
+    border-radius: 8px;
+}
+
+.centered h3,
+.centered h2 {
+    margin: 0 auto;
+    color: var(--color-beamer-blue);
+}
+
+.centered h1::before,
+.centered h2::before {
+    display: none;
+}
+
+/* Regular headings */
+h1 {
+    position: relative;
+    z-index: 1;
+    color: white;
+    margin-bottom: 20px;
+}
+
+h1::before {
+    content: '';
+    position: absolute;
+    left: -20%;
+    bottom: -11px;
+    top: -10px;
+    width: 140%;
+    z-index: -1;
+    background: var(--color-beamer-dark);
+}
+
+h2 {
+    color: white;
+    font-weight: 350;
+    font-size: 1.6rem;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+h2::before {
+    content: '';
+    position: absolute;
+    left: -20%;
+    bottom: 5%;
+    width: 140%;
+    height: 95%;
+    z-index: -1;
+    display: inline-block;
+    background: var(--color-beamer-blue);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+            0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+    font-size: 1.4em;
+    color: var(--color-beamer-blue);
+    margin-bottom: 15px;
+}
+
+/* Content styling */
+.content {
+    flex: 1;
+    overflow: hidden;
+}
+
+.auto-sizing {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Table styling from beam */
+table {
+    font-size: 16px;
+    border-radius: 3px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin: 10px 0;
+    width: 100%;
+}
+
+thead tr {
+    background-color: var(--color-beamer-blue);
+    color: white;
+}
+
+tbody tr {
+    border-bottom: 1px solid #ccc;
+}
+
+th,
+td {
+    padding: 10px;
+}
+
+/* Admonitions from beam */
+div.admonition {
+    font-size: 0.9em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3),
+            0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: 1px solid #86989B;
+    background-color: #f7f7f7 !important;
+    padding: 1rem;
+    margin: 10px 0;
+}
+
+div.admonition>p {
+    margin: 0;
+    padding: 0;
+}
+
+div.admonition>pre {
+    margin: 0.4em 1em 0.4em 1em;
+}
+
+div.admonition>p.admonition-title {
+    position: relative;
+    font-weight: 500;
+    background-color: var(--color-admonition-bg);
+    margin: -1rem -1rem 0.8rem -1rem;
+    padding: 0.3rem 1rem 0.3rem 2rem;
+    border-radius: 5px 5px 0 0;
+}
+
+div.attention>p.admonition-title,
+div.danger>p.admonition-title,
+div.error>p.admonition-title {
+    background-color: var(--colour-error-bg);
+}
+
+div.important>p.admonition-title,
+div.caution>p.admonition-title,
+div.warning>p.admonition-title {
+    background-color: var(--colour-warning-bg);
+}
+
+div.note>p.admonition-title {
+    background-color: var(--colour-note-bg);
+}
+
+div.hint>p.admonition-title,
+div.tip>p.admonition-title,
+div.seealso>p.admonition-title {
+    background-color: var(--colour-success-bg);
+}
+
+div.admonition-todo>p.admonition-title {
+    background-color: var(--colour-todo-bg);
+}
+
+p.admonition-title::before {
+    content: "";
+    height: 1rem;
+    left: .5rem;
+    top: .5rem;
+    position: absolute;
+    width: 1rem;
+    background-color: #5f5f5f;
+}
+
+/* Responsive text sizing for content area */
+.chunk {
+    margin-bottom: 10px;
+}
+
+.chunk-horizontal {
+    display: flex;
+    gap: 20px;
+}
+
+.chunk-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Ensure content doesn't overflow */
+p, ul, ol {
+    margin: 0.5em 0;
+    line-height: 1.4;
+}
+
+li {
+    margin: 0.2em 0;
+}
+
+/* Code blocks */
+pre {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 4px;
+    overflow: auto;
+    margin: 10px 0;
+    border-left: 4px solid var(--color-beamer-blue);
+}
+
+code {
+    background-color: #f5f5f5;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-family: 'Courier New', monospace;
+}
