@@ -1,5 +1,7 @@
 ---
-theme: header_footer
+theme: custom
+slide_width: 1160
+slide_height: 475
 ---
 
 # Test Header Footer Template

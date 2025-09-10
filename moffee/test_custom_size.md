@@ -1,7 +1,5 @@
 ---
 theme: custom
-slide_width: 1160
-slide_height: 475
 ---
 
 # 自定义尺寸测试
