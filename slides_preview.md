@@ -1,41 +1,51 @@
 ---
-theme: default
+theme: custom
 layout: content
 aspect_ratio: "16:9"
 ---
 
-# 从零开始认识Python
-
-<->
-## 什么是Python  
-- 由 **Guido van Rossum** 于 1991 年发布  
-  *高层次 · 解释型 · 通用编程语言*  
-- **特点**  
-  - 语法简洁、可读性高  
-  - 跨平台、生态庞大  
-- **典型场景**  
-  数据分析 | Web后端 | 自动化脚本 | AI | IoT
-
-<->
-## 安装运行环境  
-1. **官方解释器 CPython**  
-   `python.org` → 下载 3.x → 勾选 *Add to PATH*  
-2. **验证**  
-   ```bash
-   python --version   # Python 3.x.x ✔
-   ```  
-3. **REPL**  
-   终端输入 `python` → `>>>` 即时交互  
-4. **推荐 IDE**  
-   VS Code + Python 扩展 | PyCharm Community | Jupyter Notebook
+# C语言入门与开发环境搭建
+## 从零开始，掌握高效、可移植的系统级语言
 
 ---
 
-## 第一个Python程序  
-```python
-# hello.py
-print("Hello, Python!")
-```  
-- 终端运行：`python hello.py` → `Hello, Python!`  
-- **解释流程**  
-  源代码 → 字节码 → Python VM → 屏幕输出
+## <-> 1972 · UNIX之父
+### Dennis Ritchie @Bell Labs
+#### 高效 | 可移植 | 贴近硬件  
+> 操作系统 · 嵌入式 · 高性能计算首选语言
+
+---
+
+## ===
+### 开发环境速配
+#### Windows
+- MinGW-w64 + VS Code
+- 一键脚本：**x86_64-posix-seh**
+#### macOS
+- `xcode-select --install`
+#### Linux
+- `sudo apt install build-essential`
+
+---
+
+## ===
+### Hello, C!
+```c
+#include <stdio.h>
+int main() {
+    printf("Hello, C!\n");
+    return 0;
+}
+```
+> 编译：`gcc hello.c -o hello && ./hello`
+
+---
+
+## <-> 结构剖析
+- `#include <stdio.h>` 预处理指令
+- `int main()` 程序入口
+- `return 0;` 正常退出
+- `printf` 标准库函数
+
+!!! warning 常见坑
+    漏分号 / 拼错`main` / 中文空格路径

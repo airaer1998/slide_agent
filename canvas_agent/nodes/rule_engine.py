@@ -23,7 +23,7 @@ def rule_engine(state: GraphState) -> GraphState:
 ### 前置配置（页面顶部）
 ```yaml
 ---
-theme: default
+theme: custom
 layout: content
 aspect_ratio: "16:9"
 ---

@@ -176,7 +176,7 @@ def initialize_preview_file(filename: str):
     初始化预览文件
     """
     content = """---
-theme: default
+theme: custom
 layout: content
 aspect_ratio: "16:9"
 ---
@@ -199,14 +199,16 @@ def start_moffee_preview(filename: str):
         subprocess.run(["pkill", "-f", "moffee live"], timeout=5)
         
         # 检查moffee是否可用
+        env = os.environ.copy()
+        env['PYTHONPATH'] = '/root/code/slide_agent/moffee'
         result = subprocess.run(['moffee', '--version'], 
-                              capture_output=True, text=True, timeout=5)
+                              capture_output=True, text=True, timeout=5, env=env)
         if result.returncode != 0:
             print("[Warning]: moffee 命令不可用，预览功能将被跳过")
             return None
             
         # 启动moffee live预览
-        process = subprocess.Popen(['moffee', 'live', filename])
+        process = subprocess.Popen(['moffee', 'live', filename], env=env)
         return process
     except Exception as e:
         print(f"[Warning]: 启动moffee预览失败: {e}")
@@ -228,7 +230,7 @@ def create_final_markdown(slides: list) -> str:
     """
     if not slides:
         return """---
-theme: default
+theme: custom
 layout: content
 aspect_ratio: "16:9"
 ---
@@ -240,7 +242,7 @@ aspect_ratio: "16:9"
     
     # 添加frontmatter到第一页
     final_content = """---
-theme: default
+theme: custom
 layout: content
 aspect_ratio: "16:9"
 ---

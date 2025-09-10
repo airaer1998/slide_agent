@@ -98,7 +98,7 @@ def create_fallback_content(state: GraphState) -> str:
     创建失败情况下的备用内容
     """
     content = """---
-theme: default
+theme: custom
 layout: content
 aspect_ratio: "16:9"
 ---

@@ -27,9 +27,8 @@ class Config:
     DEFAULT_TEMPERATURE = 0.7
     
     # Moffee配置
-    DEFAULT_THEME = "default"
+    DEFAULT_THEME = "custom"
     DEFAULT_LAYOUT = "content"
-    DEFAULT_ASPECT_RATIO = "16:9"
     
     # 工作流配置
     THREAD_ID = "canvas_workflow_1"

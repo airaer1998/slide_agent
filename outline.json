@@ -1,18 +1,14 @@
 [
   {
     "page": 1,
-    "content": "标题：从零开始认识Python\n要点1：什么是Python\n- 由Guido van Rossum于1991年发布的高层次、解释型、通用编程语言\n- 特点：语法简洁、可读性高、跨平台、拥有庞大生态\n- 典型应用场景：数据分析、Web后端、自动化脚本、人工智能、物联网\n\n要点2：安装运行环境\n- 官方解释器CPython：到python.org下载对应操作系统的3.x版本，勾选“Add to PATH”\n- 验证安装：在终端输入python --version，出现Python 3.x.x表示成功\n- 交互式REPL：直接输入python进入>>>提示符，可立即执行单行代码\n- 集成开发环境推荐：VS Code + Python扩展、PyCharm Community、Jupyter Notebook\n\n要点3：第一个Python程序\n- 打开VS Code，新建hello.py，输入print(\"Hello, Python!\")\n- 终端运行：python hello.py，看到终端输出Hello, Python!\n- 解释执行流程：源代码→解释器逐行编译为字节码→Python虚拟机运行→输出结果"
+    "content": "标题：C语言入门与开发环境搭建\n要点：\n1. C语言的历史与地位：1972年由Dennis Ritchie在贝尔实验室设计，最初用于UNIX系统开发；因其高效、可移植、贴近硬件，成为操作系统、嵌入式、高性能计算的首选语言。\n2. 开发环境安装与配置：\n   - Windows：推荐MinGW-w64 + VS Code，安装步骤：下载MinGW-w64安装器→选择x86_64、posix、seh→配置环境变量→在VS Code中安装C/C++扩展→配置tasks.json与launch.json实现一键编译调试。\n   - macOS：Xcode命令行工具（xcode-select --install）+ VS Code或CLion。\n   - Linux：GCC（sudo apt install build-essential）+ VS Code或Vim。\n3. 第一个C程序：\n   ```c\n   #include <stdio.h>\n   int main() {\n       printf(\"Hello, C!\\n\");\n       return 0;\n   }\n   ```\n   编译运行：gcc hello.c -o hello && ./hello\n4. 程序结构解析：预处理指令#include、主函数main、返回值0表示正常退出、printf来自标准库stdio.h。\n5. 常见错误：忘记分号、main拼写错误、未包含头文件、路径含中文或空格导致编译失败。"
   },
   {
     "page": 2,
-    "content": "第2页的内容"
+    "content": "标题：数据类型、变量与运算符\n要点：\n1. 基本数据类型：\n   - 整型：char(1B, -128~127)、short(2B)、int(4B)、long(4B/8B)、long long(8B)；\n   - 浮点：float(4B, 6位精度)、double(8B, 15位精度)；\n   - 其他：_Bool(1B, 0/1)、枚举enum。\n2. 变量声明与初始化：\n   ```c\n   int age = 25;\n   float price = 19.99f;\n   char grade = 'A';\n   ```\n   命名规则：字母/下划线开头，区分大小写，避免关键字如int、return。\n3. 格式化输入输出：\n   - printf：%d(int)、%f(float/double)、%c(char)、%x(十六进制)、%p(地址)；\n   - scanf：需取地址符&，如scanf(\"%d\", &age)。\n4. 运算符：\n   - 算术：+ - * / %，整数除法截断，5/2=2；\n   - 关系：> < == !=，结果为0或1；\n   - 逻辑：&& || !，短路特性；\n   - 自增自减：i++(先用后加)、++i(先加后用)；\n   - 类型转换：隐式(小转大)与显式(double)x，避免精度丢失。\n5. 示例：计算圆面积\n   ```c\n   double r;\n   scanf(\"%lf\", &r);\n   printf(\"Area=%.2f\\n\", 3.14159 * r * r);\n   ```"
   },
   {
     "page": 3,
-    "content": "第3页的内容"
-  },
-  {
-    "page": 4,
-    "content": "第4页的内容"
+    "content": "标题：控制结构与函数基础\n要点：\n1. 条件语句：\n   - if-else：\n     ```c\n     if (score >= 90) printf(\"A\");\n     else if (score >= 60) printf(\"Pass\");\n     else printf(\"Fail\");\n     ```\n   - 三目：max = (a>b)?a:b;\n   - switch-case：仅适用于整型常量，break防止贯穿。\n2. 循环语句：\n   - for：for(i=0;i<10;i++) sum+=i;\n   - while：while(n--) factorial*=n;\n   - do-while：至少执行一次；\n   - break跳出循环，continue跳过本次。\n3. 函数定义与调用：\n   ```c\n   int add(int a, int b) {\n       return a + b;\n   }\n   int main() {\n       printf(\"%d\\n\", add(3, 4));\n   }\n   ```\n   函数声明（原型）放在main前或头文件中，形参与实参按值传递。\n4. 作用域与存储期：\n   - 局部变量：花括号内有效，栈存储；\n   - 全局变量：文件作用域，静态存储；\n   - static：函数内保持值，函数外限制链接属性；\n   - extern：跨文件引用全局变量。\n5. 调试技巧：\n   - 使用printf打印中间值；\n   - VS Code断点调试：F9打断点，F5启动，监视变量值与调用栈。"
   }
 ]

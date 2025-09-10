@@ -186,8 +186,11 @@ def check_moffee_available() -> bool:
     """检查moffee是否可用"""
     try:
         import subprocess
+        import os
+        env = os.environ.copy()
+        env['PYTHONPATH'] = '/root/code/slide_agent/moffee'
         result = subprocess.run(['moffee', '--version'], 
-                              capture_output=True, text=True, timeout=5)
+                              capture_output=True, text=True, timeout=5, env=env)
         return result.returncode == 0
     except Exception:
         return False
