@@ -13,27 +13,30 @@ def outline_generator(state: GraphState) -> GraphState:
     
     # 构建简化的提示词
     prompt = f"""
-请根据用户需求生成{state['slide_count']}页课件大纲，返回JSON数组格式。
+请根据用户需求生成{state['slide_count']}页课件大纲，返回一个包含'slides'键的JSON对象。
 
 用户需求：{state['original_query']}
 
 返回格式：
-[
-  {{
-    "page": 1,
-    "content": "第一页的完整内容描述，包括标题、要点、详细说明等所有文本内容"
-  }},
-  {{
-    "page": 2,
-    "content": "第二页的完整内容描述..."
-  }}
-]
+{{
+  "slides": [
+    {{
+      "page": 1,
+      "content": "第一页的完整内容描述，包括标题、要点、详细说明等所有文本内容"
+    }},
+    {{
+      "page": 2,
+      "content": "第二页的完整内容描述..."
+    }}
+  ]
+}}
 
 要求：
-1. content字段包含该页的完整内容描述，以自由文本形式
-2. 内容要符合主题"{state['original_query']}"
-3. 每页content要详细具体，避免空泛描述
-4. 直接返回JSON数组，不要其他文字
+1. 根对象必须包含一个'slides'键，其值为JSON数组。
+2. content字段包含该页的完整内容描述，以自由文本形式。
+3. 内容要符合主题"{state['original_query']}"。
+4. 每页content要详细具体，避免空泛描述。
+5. 直接返回JSON对象，不要其他文字。
 """
 
     try:
@@ -65,33 +68,23 @@ def outline_generator(state: GraphState) -> GraphState:
             print(f"[Debug]: JSON解析失败，原始响应: {outline_response}")
             raise ValueError(f"JSON解析失败: {str(e)}")
         
-        # 提取大纲列表（处理可能的不同响应格式）
-        if isinstance(outline_data, list):
-            # 标准格式：直接是数组
-            outline_list = outline_data
-        elif isinstance(outline_data, dict):
-            # 检查是否包含常见的键
-            if 'outline' in outline_data and isinstance(outline_data['outline'], list):
-                outline_list = outline_data['outline']
-            elif 'slides' in outline_data and isinstance(outline_data['slides'], list):
-                outline_list = outline_data['slides']
-            else:
-                # 尝试找到第一个列表值
-                outline_list = None
+        # 提取大纲列表
+        if isinstance(outline_data, dict) and 'slides' in outline_data and isinstance(outline_data['slides'], list):
+            outline_list = outline_data['slides']
+        else:
+            # 为了兼容旧格式或意外格式，尝试从根对象中寻找列表
+            outline_list = None
+            if isinstance(outline_data, list):
+                outline_list = outline_data # 直接是列表
+            elif isinstance(outline_data, dict):
                 for value in outline_data.values():
                     if isinstance(value, list):
                         outline_list = value
                         break
-                
-                # 如果还是找不到列表，可能是单个slide对象，尝试转换为列表
-                if outline_list is None:
-                    # 检查是否是单个slide对象（包含page, title等字段）
-                    if 'page' in outline_data or 'title' in outline_data:
-                        outline_list = [outline_data]
-                    else:
-                        raise ValueError("无法从AI响应中提取大纲列表")
-        else:
-            raise ValueError("AI响应格式不正确：必须是对象或数组")
+            
+            if outline_list is None:
+                 raise ValueError("AI响应中找不到'slides'数组，或响应格式不正确")
+
         
         # 验证和标准化大纲格式
         validated_outline = []

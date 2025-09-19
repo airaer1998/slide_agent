@@ -4,48 +4,61 @@ layout: content
 aspect_ratio: "16:9"
 ---
 
-# C语言入门与开发环境搭建
-## 从零开始，掌握高效、可移植的系统级语言
+@(layout=centered, background-color=#0d1117)
+
+# Transitioning from Python to C  
+**Foundations for Systems & AI**
 
 ---
 
-## <-> 1972 · UNIX之父
-### Dennis Ritchie @Bell Labs
-#### 高效 | 可移植 | 贴近硬件  
-> 操作系统 · 嵌入式 · 高性能计算首选语言
+## Learning Objectives
+1. Articulate core differences between **interpreted (Python)** and **compiled (C)** execution  
+2. Write, compile, and run a minimal *Hello, World!* C program with `gcc`  
+3. Declare variables with explicit static types: `int`, `float`, `double`, `char`  
+4. Use `printf` / `scanf` for basic I/O and debug with `printf`  
+5. Trace the four-stage compilation pipeline: *preprocess → compile → assemble → link*
 
 ---
 
-## ===
-### 开发环境速配
-#### Windows
-- MinGW-w64 + VS Code
-- 一键脚本：**x86_64-posix-seh**
-#### macOS
-- `xcode-select --install`
-#### Linux
-- `sudo apt install build-essential`
+## Course Map
+<->  
+**Session 1 (200 min)**  
+Basics: syntax, types, I/O, compilation  
+
+**Session 2 (200 min)**  
+Control structures & functions
 
 ---
 
-## ===
-### Hello, C!
-```c
-#include <stdio.h>
-int main() {
-    printf("Hello, C!\n");
-    return 0;
-}
-```
-> 编译：`gcc hello.c -o hello && ./hello`
+## Assessment
+- Weekly checkpoint quiz  
+- 5 × Python → C conversions  
+- Calculator mini-project
 
 ---
 
-## <-> 结构剖析
-- `#include <stdio.h>` 预处理指令
-- `int main()` 程序入口
-- `return 0;` 正常退出
-- `printf` 标准库函数
+!!! warning
+Install **GCC or Clang** + **VS Code** (C/C++ extension) before next class.
 
-!!! warning 常见坑
-    漏分号 / 拼错`main` / 中文空格路径
+---
+
+@layout=left-title
+# Why Learn C for<br>Computer Systems & AI/ML?
+
+===
+
+## Systems Perspective
+- C maps closely to hardware  
+  `pointers = addresses`, `structs = memory layouts`
+- OS kernels, embedded firmware, high-performance libs (BLAS, OpenCV) written in C
+
+## AI/ML Connection
+- TensorFlow Lite Micro runs on C++ (subset of C)
+- Optimize Python extensions by understanding memory & cache (NumPy backend)
+
+## Career Edge
+- Device drivers, GPU kernels, real-time robotics demand C mastery
+
+<->
+
+![stack-diagram](resources/c-vs-python-stack.png)
