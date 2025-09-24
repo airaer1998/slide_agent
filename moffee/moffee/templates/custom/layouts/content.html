@@ -7,13 +7,13 @@
     <!-- Original Slide Content -->
     <div class="slide-content" {{"style"}}="{% for key, value in slide.styles.items() %}{{ key }}: {{ value | escape }}; {% endfor %}">
         {% if slide.h1 %}
-        <h1>{{ slide.h1 }}</h1>
+        <h1>{{ slide.h1 | markdown }}</h1>
         {% endif %}
         {% if slide.h2 %}
-        <h2>{{ slide.h2 }}</h2>
+        <h2>{{ slide.h2 | markdown }}</h2>
         {% endif %}
         {% if slide.h3 %}
-        <h3>{{ slide.h3 }}</h3>
+        <h3>{{ slide.h3 | markdown }}</h3>
         {% endif %}
         <div class="content">
             <div class="auto-sizing">

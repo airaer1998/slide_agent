@@ -10,7 +10,7 @@ extensions = [
     # "nl2br",
     "admonition",
     "pymdownx.superfences",
-    "pymdownx.saneheaders",
+    # "pymdownx.saneheaders",
     "pymdownx.betterem",
     "pymdownx.mark",
     "pymdownx.magiclink",

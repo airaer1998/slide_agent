@@ -1,42 +1,222 @@
 [
-  {
-    "page": 1,
-    "content": "Week 1: Introduction to C Programming – From Python to C\n• Title: Transitioning from Python to C – Foundations for Systems & AI\n• Learning Objectives (5 bullets):\n  1. Articulate core differences between interpreted (Python) and compiled (C) execution.\n  2. Write, compile, and run a minimal “Hello, World!” C program using gcc.\n  3. Declare variables with explicit static types (int, float, double, char).\n  4. Use printf/scanf for basic console I/O and debug with printf.\n  5. Trace the four-stage compilation pipeline (preprocess → compile → assemble → link).\n• Course Map: Session 1 (200 min) – Basics; Session 2 (200 min) – Control & Functions\n• Assessment: Weekly checkpoint quiz + 5 Python→C conversions + calculator mini-project\n• Setup Reminder: Install GCC or Clang + VS Code (with C/C++ extension) before next class."
-  },
-  {
-    "page": 2,
-    "content": "Why Learn C for Computer Systems & AI/ML?\n• Systems Perspective\n  – C maps closely to hardware: pointers = addresses, structs = memory layouts.\n  – OS kernels, embedded firmware, high-performance libraries (BLAS, OpenCV) are written in C.\n• AI/ML Connection\n  – TensorFlow Lite Micro runs on C++ (subset of C concepts).\n  – Understand memory and cache behavior to optimize Python extensions (e.g., NumPy backend).\n• Career Edge\n  – Device drivers, GPU kernels, real-time robotics demand C mastery.\n• Visual Metaphor: Stack diagram showing Python interpreter layer vs. C running directly on silicon."
-  },
-  {
-    "page": 3,
-    "content": "Python vs. C – Key Paradigm Shifts\n• Execution Model\n  – Python: Interpreter (CPython) executes bytecode at runtime.\n  – C: Compiler (gcc) translates to machine code once; .exe/.out runs natively.\n• Typing Discipline\n  – Python: Dynamic, duck-typed.  x = 10; x = \"hi\"  # legal\n  – C: Static, explicit.  int x = 10; x = \"hi\";  // compile-time error\n• Memory Management\n  – Python: Automatic garbage collection.\n  – C: Manual malloc/free; risk of leaks & dangling pointers.\n• Syntax Snapshot (side-by-side)\n  – Variables, loops, functions: 4 comparative code snippets\n• Take-away Table: 3×3 matrix summarizing interpreted vs. compiled, dynamic vs. static, auto vs. manual memory."
-  },
-  {
-    "page": 4,
-    "content": "Your First C Program – Live Demo & Deconstruction\n• Code\n  #include <stdio.h>\n\n  int main(void) {\n      printf(\"Hello, World!\\n\");\n      return 0;\n  }\n• Anatomy Line-by-Line\n  – #include <stdio.h> : preprocessor directive to pull in standard I/O headers.\n  – int main(void) : program entry point mandated by C runtime; returns exit status.\n  – printf format string \"%s\" and newline necessity.\n  – return 0; signals success to OS.\n• Compilation Command\n  gcc hello.c -o hello\n  ./hello  # execute\n• Common Errors & Fixes\n  – forgetting \\n leads to shell prompt collision; forgetting return type defaults to int in old C but warning in C99."
-  },
-  {
-    "page": 5,
-    "content": "Basic C Syntax Deep Dive – Variables and Types\n• Variable Declaration & Initialization\n  int    age      = 21;        // 4 bytes signed\n  float  gpa      = 3.7f;      // 4 bytes IEEE-754\n  double pi       = 3.141592653589793;\n  char   initial  = 'A';       // 1 byte ASCII\n• Type Specifiers & Qualifiers\n  short, long, long long, unsigned, const, volatile.\n• Identifier Rules\n  – Must start with letter/underscore; case-sensitive.\n• Format Specifiers Cheat-Sheet\n  %d %f %lf %c %s\n• Live Exercise: Prompt user for age & gpa with scanf; verify proper ampersand usage & address passing.\n• Pitfall Showcase: Mismatch %f with int variable yields UB."
-  },
-  {
-    "page": 6,
-    "content": "Input & Output – printf and scanf Patterns\n• printf Power-Ups\n  – Field width & precision: printf(\"%6.2f\\n\", score);\n  – Escape sequences: \\t \\n \\\\ %%\n• scanf Safety\n  – Always check return value: if (scanf(\"%d\", &n) != 1) { /* handle error */ }\n  – Whitespace handling in %c vs. %s.\n• Mini-Pattern Library\n  – Reading an entire line: fgets(buf, sizeof(buf), stdin).\n  – Converting strings to numbers: strtol, atof.\n• Interactive Demo: Build a Fahrenheit→Celsius converter accepting float input and printing with one decimal place."
-  },
-  {
-    "page": 7,
-    "content": "The Compilation Pipeline – From .c to Executable\n• Four Stages\n  1. Preprocessing: handles #includes, macros (gcc -E).\n  2. Compilation: generates assembly (gcc -S).\n  3. Assembly: converts .s to .o object code (as).\n  4. Linking: combines object files & libraries into a.out (ld).\n• Diagram: Horizontal flowchart with file extensions .c → .i → .s → .o → a.out.\n• gcc Flags Cheatsheet\n  – -Wall -Wextra -std=c99 -g -O2\n• Reading Error Messages\n  – ‘undefined reference’ vs. ‘implicit declaration’; line numbers.\n• Hands-On Lab\n  – Compile with each stage saved: gcc -save-temps hello.c.\n  – Inspect hello.i and hello.s to see macro expansion and assembly."
-  },
-  {
-    "page": 8,
-    "content": "Control Structures in C – if, for, while, do-while\n• Syntax Side-by-Side with Python\n  C: if (x > 0) { … } vs. Python: if x > 0:\n• Loop Variants\n  – for (init; condition; update) { … }\n  – while (condition) { … }\n  – do { … } while (condition);  // executes at least once\n• Scope & Braces Rules\n  – Single statement after if may omit braces (discouraged).\n  – Counter variable declared inside for loop (C99 style: for (int i=0; …)).\n• Mini-Pattern: Sentinel-controlled while loop reading integers until 0.\n• Exercise Starter File: Provide buggy factorial loop; students fix off-by-one & integer overflow."
-  },
-  {
-    "page": 9,
-    "content": "Functions in C – Declaration, Definition, Scope\n• Anatomy\n  return_type name(parameter_list) { body }\n• Declaration vs. Definition\n  – Prototype in header or top of file: double square(double x);\n  – Definition later: double square(double x) { return x*x; }\n• Parameter Passing Semantics\n  – By value: copies passed; use pointers for by-reference.\n  – Example: swap(int *a, int *b).\n• Storage Classes & Scope\n  – auto (local default), static (retains value), extern (global linkage).\n• Live Demo: Refactor Fahrenheit→Celsius to use functions convertFtoC() and getInput().\n• Checkpoint Quiz (auto-graded): Identify correct prototype for int max(int, int);"
-  },
-  {
-    "page": 10,
-    "content": "Week 1 Wrap-Up & Homework\n• Key Takeaways Slide (icon check-list)\n  – Compiled vs. interpreted ✅\n  – Static typing & memory awareness ✅\n  – Compilation stages & gcc flags ✅\n  – Basic I/O, loops, functions ✅\n• Homework Assignment Grid\n  1. Environment: Screenshot of gcc --version & IDE configuration (10 pts).\n  2. Syntax Practice: Convert 5 provided Python snippets (variables, loops, lists) to equivalent C (30 pts).\n  3. Control Structures: Write a C program printing prime numbers up to N using user input (20 pts).\n  4. Functions: Implement a four-function calculator (+ - * /) with separate functions for each operation (25 pts).\n  5. Debugging: Fix 3 intentionally broken C files; document errors & fixes (15 pts).\n• Resources Links\n  – Official GCC manual, VS Code C/C++ extension guide, C99 standard draft (annotated).\n• Next Week Teaser: Pointers and arrays – the real superpowers of C!"
-  }
+ {
+  "page": 1,
+  "content": "Part 1: Course Introduction\n• Title: Computer Systems: From Programming to Hardware\n• Subtitle: An Introductory Course for AI Students\n• Presenter: [Your Name]\n• Topic: Week 1, Lecture 1: First Steps in C"
+ },
+ {
+  "page": 2,
+  "content": "Welcome & Instructor Introduction\n• Welcome to the world of computer systems!\n• Instructor: [Your Name]\n• Background: e.g., AI & Systems Engineering\n• Passion: Exploring how software runs efficiently on underlying hardware.\n• Commitment: To make abstract concepts concrete and practical, empowering you to master core systems knowledge without fear.\n• Our Journey: We will start from familiar Python and embark on a deep-dive exploration."
+ },
+ {
+  "page": 3,
+  "content": "Course Philosophy: Connecting AI Applications to Low-Level Hardware\n• Our Goal: To build a solid bridge between high-level applications and the hardware they run on.\n• Visual Metaphor: A bridge labeled \"Computer Systems\" connecting a cloud (Python/AI Apps) to a chip (CPU/Memory/Hardware).\n• The Path:\n – Start: High-level Python programming.\n – Journey: Discover what happens beneath your code.\n – Method: Focus on hands-on, practical examples over dense theory.\n – Destination: Understand parallel computing to accelerate your AI applications."
+ },
+ {
+  "page": 4,
+  "content": "Course Objectives: What You Will Gain\n• This course will give you new \"superpowers\":\n 1. Master C: Smoothly transition from Python to the foundational language of systems programming.\n 2. Understand the Core: Unveil the mysteries of the CPU, memory, and storage hierarchies.\n 3. Gain OS Insight: Learn how the Operating System (OS) magically manages programs and resources.\n 4. Empower AI Applications: Explore how parallel computing (e.g., GPU programming) makes AI models lightning fast."
+ },
+ {
+  "page": 5,
+  "content": "Why Learn C? The \"Lingua Franca\" of Computer Systems\n• Visual: A pyramid with Python/Java at the top (Application Layer), C/C++ in the middle (System Layer), and OS/Hardware at the base.\n• Key Reasons to Learn C:\n 1. Ultimate Performance: C is synonymous with speed, allowing you to maximize hardware performance.\n 2. Low-Level Access: It's the most direct bridge between high-level languages and hardware.\n 3. Ubiquity: Operating systems, databases, and even the Python interpreter itself are built with C."
+ },
+ {
+  "page": 6,
+  "content": "Relevance to AI/ML: Understand Your Tech Stack\n• Question: What happens behind your `import tensorflow`?\n• The Stack Breakdown:\n – Top: `model.fit()` (Python Code)\n – Middle: TensorFlow/PyTorch Core (High-performance C++ & CUDA)\n – Lower: NVIDIA GPU Driver (C Language)\n – Base: GPU Hardware\n• Key Takeaway: The performance core of AI frameworks is written in C/C++ for maximum efficiency. To make models faster, you need to understand memory management, multi-threading, and GPU programming—all C's home turf."
+ },
+ {
+  "page": 7,
+  "content": "Course Schedule & Assessment Method\n• Roadmap to Success:\n – Programming Assignments: 40% (Hands-on C programming to apply theory)\n – Quizzes: 20% (To check your understanding of core concepts)\n – Midterm Exam: 20% (Comprehensive review of the first half of the course)\n – Final Project: 20% (A small, focused systems programming project related to AI/ML)\n• Academic Integrity: All work must be your own. Discussion is encouraged, but plagiarism is strictly prohibited."
+ },
+ {
+  "page": 8,
+  "content": "Getting Started: Setting Up Your Development Environment\n• Slogan: A good craftsman needs the best tools.\n• We only need two things, and both are free:\n 1. Code Editor: Visual Studio Code (VS Code)\n  – Why: Free, powerful, huge extension library, cross-platform (Windows/macOS/Linux).\n 2. Compiler: GCC (GNU Compiler Collection)\n  – Why: The most popular and classic C language compiler."
+ },
+ {
+  "page": 9,
+  "content": "Environment Setup (1/3): Installing VS Code\n• Step 1: Download the Code Editor\n• Website: code.visualstudio.com\n• Instructions:\n 1. Visit the website.\n 2. Click the download button for your operating system (Windows, macOS, Linux).\n 3. Run the installer like any other application."
+ },
+ {
+  "page": 10,
+  "content": "Environment Setup (2/3): Installing the C Compiler (GCC)\n• Step 2: Get the \"Translator\"\n• For Windows Users:\n – Recommendation: Install MinGW-w64 to get the GCC toolset.\n – Note: Live demo will cover installation and setting the PATH environment variable.\n – Check command: `gcc --version`\n• For macOS Users:\n – In the Terminal, run: `xcode-select --install`\n – This installs Apple's Command Line Tools, which includes GCC (Clang).\n• For Linux (Ubuntu/Debian) Users:\n – In the Terminal, run: `sudo apt-get install build-essential`"
+ },
+ {
+  "page": 11,
+  "content": "Environment Setup (3/3): Add Extensions to VS Code\n• Step 3: Make Your Editor \"Smarter\"\n• Install these two extensions from the VS Code Marketplace:\n 1. C/C++\n  – Publisher: Microsoft\n  – Purpose: Core plugin for syntax highlighting, IntelliSense, error checking, and debugging.\n 2. Code Runner\n  – Publisher: Jun Han\n  – Purpose: Allows one-click compilation and execution of code files, great for quick tests."
+ },
+ {
+  "page": 12,
+  "content": "Live Demo: Let's Configure Together\n• Let's Do It Together!\n• Agenda for Live Demo:\n 1. Confirm VS Code is installed correctly.\n 2. Install the C compiler (focusing on Windows users).\n 3. Install the necessary extensions in VS Code.\n 4. Write and run our first \"Hello, World!\" program to test the setup.\n• Reminder: Please raise your hand if you encounter any issues!"
+ },
+ {
+  "page": 13,
+  "content": "Today's Agenda & Transition\n• Today's Schedule:\n – ✓ Part 1: Course Intro & Environment Setup (30 min)\n – → Part 2: Python vs. C & Basic C Syntax (70 min)\n – → Part 3: Introduction to the Compilation Process (40 min)\n – (Note: A deeper dive on Python vs C differences will follow in a later lecture)"
+ },
+ {
+  "page": 14,
+  "content": "Q&A Session\n• Any Questions?\n• Before we move on to the next exciting topic, are there any questions about the course introduction or the environment setup?"
+ },
+ {
+  "page": 15,
+  "content": "Part 2: Basic C Syntax\n• Starting from the first program to build your C knowledge base."
+ },
+ {
+  "page": 16,
+  "content": "Review: Our First C Program - \"Hello, World!\"\n• Code Snippet:\n ```c\n #include <stdio.h>\n \n int main() {\n    printf(\"Hello, World!\\n\");\n    return 0;\n }\n ```\n• Observation: It looks more complex than Python's `print(\"Hello, World!\")`.\n• Assurance: Don't worry, these lines form the fundamental skeleton of nearly every C program.\n• Goal: Understand every single line of this code in the next 10 minutes."
+ },
+ {
+  "page": 17,
+  "content": "Program Structure (1/3): #include <stdio.h>\n• `#include`: A \"preprocessor directive\" that tells the compiler to include the contents of another file before compilation.\n• `<stdio.h>`: A \"Header File\" (Standard Input/Output Header).\n• Analogy: This is like C's standard toolbox. It contains declarations for basic I/O functions like `printf()`.\n• Python Comparison: Very similar to `import math` or `import os` in Python, used to access pre-defined functionality."
+ },
+ {
+  "page": 18,
+  "content": "Program Structure (2/3): int main() { ... }\n• `main` function: The one and only entry point of a program.\n• Rule: A C program must have exactly one `main` function. The OS starts execution from here.\n• Breakdown:\n – `int`: The \"Return Type.\" It specifies that `main` will return an integer value to the OS upon completion.\n – `main()`: The function name. Parentheses can hold command-line arguments (covered later).\n – `{ ... }`: Curly braces define the function's \"Scope.\" All code belonging to `main` must be inside them."
+ },
+ {
+  "page": 19,
+  "content": "Program Structure (3/3): return 0;\n• `return 0;`: The final instruction in our `main` function.\n• Purpose: It returns a value to the operating system to report the program's exit status.\n• Convention:\n – A return value of `0` indicates success.\n – A non-zero value (e.g., `1`, `-1`) indicates that an error occurred.\n• CRITICAL NOTE - The Semicolon `;`: In C, most statements MUST end with a semicolon. This is a strict syntax rule and a common mistake for beginners."
+ },
+ {
+  "page": 20,
+  "content": "Transition: From Structure to Content\n• Analogy: We've built the house's frame (`main` function), now it's time to add the furniture.\n• Next Core Topics:\n – Variables: Containers for storing data.\n – Data Types: Rules that define what a container can hold and how big it is."
+ },
+ {
+  "page": 21,
+  "content": "Variables & Types (1/8): Python vs. C\n• The Core Difference: You must \"declare\" before you use.\n• In Python (Dynamic Typing):\n ```python\n # Variable 'x' is created and its type is inferred at assignment\n x = 10\n y = \"Hello\"\n ```\n• In C (Static Typing):\n ```c\n // First, you must tell the compiler you need a box named 'x' for an integer.\n int x;\n // Then, you can put a value in it.\n x = 10;\n \n // You can also declare and initialize in one step.\n int age = 20;\n ```"
+ },
+ {
+  "page": 22,
+  "content": "Variables & Types (2/8): Why Does C Require Static Types?\n• Motto: \"For performance and safety!\"\n• Static Typing: The type of every variable is determined at compile-time (e.g., C, C++, Java).\n• Benefit 1 (Performance): The compiler knows exactly how much memory to allocate for each variable (e.g., an `int` needs 4 bytes). This makes memory allocation and access extremely fast.\n• Benefit 2 (Safety): The compiler catches type-related errors before the program runs. You can't assign a string to an `int` variable; the compiler will stop you, preventing runtime bugs.\n• Trade-off: Python's dynamic typing is flexible, but that flexibility comes with a performance cost."
+ },
+ {
+  "page": 23,
+  "content": "Variables & Types (3/8): C's Four Basic Data Types\n• The fundamentals:\n – Integer (`int`): Stores whole numbers. Ex: `int age = 25;`\n – Floating-Point (`float`): Stores single-precision decimal numbers. Ex: `float price = 19.99f;`\n – Double-Precision (`double`): Stores higher-precision decimal numbers. Ex: `double pi = 3.1415926535;`\n – Character (`char`): Stores a single character. Ex: `char grade = 'A';`\n• Important Notes:\n – `char` literals use single quotes (`' '`).\n – C has no built-in string type! We will learn to use arrays of `char`s to simulate strings later."
+ },
+ {
+  "page": 24,
+  "content": "Variables & Types (4/8): Memory Size with sizeof\n• Question: How much space does a variable actually occupy in memory?\n• Answer: Use the `sizeof()` operator. It returns the size of a type or variable in bytes.\n• Example Code:\n ```c\n printf(\"An int takes %zu bytes\\n\", sizeof(int));\n printf(\"A double takes %zu bytes\\n\", sizeof(double));\n printf(\"A char takes %zu bytes\\n\", sizeof(char));\n ```\n• Typical Output (on a 64-bit system):\n – int: 4 bytes\n – float: 4 bytes\n – double: 8 bytes\n – char: 1 byte"
+ },
+ {
+  "page": 25,
+  "content": "Variables & Types (5/8): The Range of Types\n• Analogy: The size of a cup determines how much water it can hold.\n• A variable's range is determined by its size in bits (1 Byte = 8 bits).\n• An `int` (4 bytes = 32 bits) can represent 2^32 different values.\n• Approximate Ranges:\n – `char` (1 byte): -128 to 127\n – `int` (4 bytes): -2.1 billion to +2.1 billion\n – `float` (4 bytes): ~6-7 decimal digits of precision\n – `double` (8 bytes): ~15-16 decimal digits of precision\n• Critical Concept: Storing a number larger than the maximum range causes an \"Overflow,\" a dangerous programming error."
+ },
+ {
+  "page": 26,
+  "content": "Variables & Types (6/8): Variable Naming Rules\n• Give your variables meaningful names.\n• Rules:\n – Can contain letters, numbers, and underscore `_`.\n – Must begin with a letter or underscore.\n – Case-sensitive (`age` and `Age` are different).\n – Cannot be a C keyword (like `int`, `return`, `if`).\n• ✅ Good Names: `student_age`, `price`, `userName`\n• ❌ Bad Names: `1stPlace`, `student age`, `int`\n• Best Practice: Use descriptive names to make your code self-documenting."
+ },
+ {
+  "page": 27,
+  "content": "Variables & Types (7/8): Constants with const\n• Problem: How to define a value that should never change, like π?\n• Solution: Use the `const` keyword to define a constant.\n• Example:\n ```c\n #include <stdio.h>\n \n int main() {\n    const double PI = 3.14159;\n    // PI = 3.14; // This would cause a compile error!\n    printf(\"Pi is: %f\\n\", PI);\n    return 0;\n }\n ```\n• Benefits: Improves code readability and maintainability, and prevents accidental modification."
+ },
+ {
+  "page": 28,
+  "content": "Variables & Types (8/8): Summary\n• Key Takeaways:\n 1. Declare Before Use: `type_name variable_name;`\n 2. Static Typing: Types are fixed at compile time for performance and safety.\n 3. Four Basic Types: `int`, `float`, `double`, `char`.\n 4. Memory Size: Use `sizeof()` to check the byte size of a type.\n 5. Value Range: Memory size determines the possible range of values; beware of overflow.\n 6. Constants: Use `const` to define unchangeable values."
+ },
+ {
+  "page": 29,
+  "content": "Basic Input/Output (1/6): printf()\n• `printf`: Formatted Print\n• Purpose: The primary way to display output from your program.\n• Basic Usage: `printf(\"Your text here\");`\n• Printing Variables: Use \"Format Specifiers\" as placeholders.\n• Example:\n ```c\n int age = 25;\n float weight = 65.5;\n char initial = 'J';\n \n printf(\"My age is %d.\\n\", age);\n printf(\"My weight is %f kg.\\n\", weight);\n printf(\"My initial is %c.\\n\", initial);\n ```"
+ },
+ {
+  "page": 30,
+  "content": "Basic Input/Output (2/6): Common Format Specifiers\n• Placeholders you must know:\n – `%d`: For `int` (decimal integer).\n – `%f`: For `float` and `double` (floating point number).\n – `%c`: For `char` (single character).\n – `%%`: To print a literal '%' sign.\n• Pro Tip: Control floating-point precision.\n – `%.2f` will round the number to two decimal places.\n – Example:\n ```c\n double price = 19.999;\n printf(\"The price is $%.2f\\n\", price); // Output: The price is $20.00\n ```"
+ },
+ {
+  "page": 31,
+  "content": "Basic Input/Output (3/6): scanf()\n• `scanf`: Scan Formatted Input\n• Purpose: To read input from the user's keyboard and store it in a variable.\n• Syntax: `scanf(\"format_specifier\", &variable_name);`\n• Example:\n ```c\n int user_age;\n \n printf(\"Please enter your age: \");\n scanf(\"%d\", &user_age); // Read an integer\n \n printf(\"OK, you are %d years old.\\n\", user_age);\n ```"
+ },
+ {
+  "page": 32,
+  "content": "Basic Input/Output (4/6): What is the '&' in scanf?\n• Core Concept: Memory Address\n• This is a crucial difference from Python!\n – `user_age`: Represents the **value** stored in the variable (e.g., 25).\n – `&user_age`: Represents the **memory address** of the variable (e.g., its location, like 0x7ffee123456c).\n• Why it's needed: `scanf` needs to know *where* in memory to store the input value. You must provide the address, not the current value.\n• Rule of Thumb: When using `scanf`, always put an `&` before the variable name (unless it's a string)."
+ },
+ {
+  "page": 33,
+  "content": "Basic Input/Output (5/6): The Pitfalls of scanf()\n• Warning: `scanf` is powerful but fragile.\n 1. Type Mismatch: If you ask for a `%d` and the user types a letter, the program may crash or produce garbage.\n 2. Buffer Issues: `scanf` often leaves the newline character (`\\n`) in the input buffer, which can mess up subsequent reads.\n 3. Security Risk: `scanf` does not check input length, which can lead to a serious vulnerability called a Buffer Overflow.\n• Beginner's Advice: For now, use `scanf` to read one value at a time and be mindful of potential issues."
+ },
+ {
+  "page": 34,
+  "content": "Basic Input/Output (6/6): I/O Summary\n• Key Points:\n• Output with `printf()`:\n – Syntax: `printf(\"format string\", var1, var2, ...);`\n – Use specifiers like `%d`, `%f`, `%c` as placeholders for variables.\n• Input with `scanf()`:\n – Syntax: `scanf(\"format specifier\", &variable_address);`\n – DO NOT forget the `&`!\n – Be cautious of its potential problems."
+ },
+ {
+  "page": 35,
+  "content": "Comments: Leaving Notes in Your Code\n• Two types of comments in C:\n 1. Single-Line Comments: `//`\n  – Everything from `//` to the end of the line is ignored.\n  – Ideal for short explanations of a specific line.\n  ```c\n  // This is a single-line comment\n  int a = 10; // Initialize variable a\n  ```\n 2. Multi-Line Comments: `/* ... */`\n  – Everything between `/*` and `*/` is ignored, even across multiple lines.\n  – Ideal for function descriptions or temporarily disabling a block of code.\n  ```c\n  /*\n   This is a multi-line comment.\n   The line below is temporarily disabled.\n   int b = 20;\n  */\n  ```"
+ },
+ {
+  "page": 36,
+  "content": "Exercise Time (1/3): Convert Python to C\n• Goal: Write a C program that has the same functionality as the Python code below.\n• Python Example:\n ```python\n # 1. Get user's name (single word)\n # 2. Get user's birth year\n # 3. Calculate and print user's age in 2025\n \n name = input(\"What is your name? \")\n birth_year = int(input(\"What year were you born? \"))\n current_year = 2025\n age = current_year - birth_year\n \n print(f\"Hello, {name}!\")\n print(f\"You are approximately {age} years old.\")\n ```\n• Hint: For now, use `char name[50];` to declare a character array for the name and `%s` to read/write it."
+ },
+ {
+  "page": 37,
+  "content": "Exercise Time (2/3): Live Coding & Walkthrough\n• Let's do this conversion together.\n• Step-by-Step Thinking Process:\n 1. Include Headers: We need I/O, so `#include <stdio.h>`.\n 2. Main Function: Set up the `int main() { ... return 0; }` skeleton.\n 3. Declare Variables: What data do we need?\n  – `char name[50];`\n  – `int birth_year;`\n  – `const int CURRENT_YEAR = 2025;` (A constant is better here)\n  – `int age;`\n 4. User Interaction: Use `printf` to prompt and `scanf` to read input.\n  – Remember: `%s` for the name array does not need an `&`!\n 5. Calculation: `age = CURRENT_YEAR - birth_year;`\n 6. Output Result: Use `printf` to display the final message."
+ },
+ {
+  "page": 38,
+  "content": "Exercise Time (3/3): C Solution Reference\n• Final Code:\n ```c\n #include <stdio.h>\n \n int main() {\n    // 1. Declare all necessary variables\n    char name[50];\n    int birth_year;\n    const int CURRENT_YEAR = 2025;\n    int age;\n \n    // 2. Get user input\n    printf(\"What is your name? \");\n    scanf(\"%s\", name); // Note: no '&' for string arrays\n \n    printf(\"What year were you born? \");\n    scanf(\"%d\", &birth_year);\n \n    // 3. Perform calculation\n    age = CURRENT_YEAR - birth_year;\n \n    // 4. Print the result\n    printf(\"Hello, %s!\\n\", name);\n    printf(\"You are approximately %d years old.\\n\", age);\n \n    return 0;\n }\n ```"
+ },
+ {
+  "page": 39,
+  "content": "Section Summary & Transition\n• Core Concepts of Basic C Syntax:\n – Program Structure: `#include` for libraries, `main` is the entry point.\n – Static Type System: Variables must be declared with a type (`int`, `char`, `float`, `double`) before use.\n – Memory Awareness: `sizeof` and type ranges are fundamental to systems programming.\n – I/O: `printf` for output, `scanf` for input (use with care!).\n – Syntax Rules: Don't forget the semicolon `;`!\n• What's Next?\n – How does our human-readable code become a program a machine can execute? Let's explore the compilation process."
+ },
+ {
+  "page": 40,
+  "content": "Part 3: The Compilation Process\n• The magical journey from C code to an executable program."
+ },
+ {
+  "page": 41,
+  "content": "The Problem: Computers Don't Understand C\n• We write in a human-readable language (C source code):\n ```c\n #include <stdio.h>\n int main() { printf(\"Hello\"); return 0; }\n ```\n• The computer understands only machine language (binary instructions):\n `01101000 01100101 01101100 01101100...`\n• The Question: How do we translate our \"recipe\" (source code) into a finished \"meal\" (executable program)?\n• The Answer: With a special program called a Compiler."
+ },
+ {
+  "page": 42,
+  "content": "The Four Core Stages of Compilation\n• A four-step assembly line:\n• `Source Code (.c)` → [Preprocessor] → `Preprocessed Code (.i)` → [Compiler] → `Assembly Code (.s)` → [Assembler] → `Object File (.o)` → [Linker] → `Executable File`\n• Note: The single command `gcc` conveniently handles all four stages for us, but understanding each step is crucial for becoming a skilled programmer."
+ },
+ {
+  "page": 43,
+  "content": "Stage 1: The Preprocessor\n• Task: Initial code preparation.\n• Input: Your source file (`program.c`)\n• Actions:\n – Processes all lines beginning with `#`.\n – `#include <stdio.h>`: Literally copies and pastes the entire content of the `stdio.h` file into your code.\n – `#define PI 3.14`: Finds all instances of `PI` and replaces them with `3.14`.\n• Output: A temporary, expanded C file (`program.i`).\n• Analogy: Preparing your ingredients before you start cooking."
+ },
+ {
+  "page": 44,
+  "content": "Stage 2: The Compiler\n• Task: Translate C code into the machine's \"dialect\" – Assembly Language.\n• Input: The preprocessed file (`program.i`)\n• Actions:\n 1. Performs strict syntax checking (e.g., missing semicolons).\n 2. Translates the C code into Assembly code.\n• Output: An assembly file (`program.s`).\n• What is Assembly? A low-level language that is very close to machine instructions but still human-readable (e.g., `movl $9, %eax`). We don't need to write it, but we should know it exists."
+ },
+ {
+  "page": 45,
+  "content": "Stage 3: The Assembler\n• Task: Translate assembly language into pure machine language.\n• Input: The assembly file (`program.s`)\n• Action: Converts each assembly instruction (like `movl`) into its corresponding binary code (0s and 1s).\n• Output: An Object File (`program.o`).\n• What's an Object File? It contains the binary machine code for your program, but it's not yet a complete, runnable program. It knows it needs to call `printf`, but it doesn't know where the code for `printf` is located."
+ },
+ {
+  "page": 46,
+  "content": "Stage 4: The Linker\n• Task: Assemble all the parts into a final product.\n• Input: Your object file (`program.o`) and system libraries (which contain the code for functions like `printf`).\n• Action: \"Links\" your code with the library code it depends on, creating a single, complete, standalone file.\n• Output: The Executable File!\n – Linux/macOS: Often has no extension (e.g., `my_program`)\n – Windows: Has a `.exe` extension (e.g., `my_program.exe`)\n• Analogy: Building a car. The linker takes your custom engine (`program.o`) and combines it with factory parts like wheels and a steering wheel (system libraries)."
+ },
+ {
+  "page": 47,
+  "content": "Using gcc: Our Magic Wand\n• `gcc` handles all four stages with one command.\n• Basic Compilation (for a file `hello.c`):\n ```bash\n gcc hello.c\n ```\n – This creates a default executable file named `a.out`.\n – To run it: `./a.out`\n• Better Compilation:\n ```bash\n gcc -o hello hello.c\n ```\n – The `-o` (output) flag lets you specify the executable's name.\n – This creates an executable file named `hello`.\n – To run it: `./hello`"
+ },
+ {
+  "page": 48,
+  "content": "An Important Habit: The -Wall Flag\n• Make the compiler your best friend.\n• The `-Wall` (Warning all) flag enables all common compiler warnings.\n• Errors vs. Warnings:\n – Errors: Prevent compilation. Your code is broken.\n – Warnings: Compilation succeeds, but your code has potential problems (e.g., logical errors, bad practices).\n• Recommended Command:\n ```bash\n gcc -Wall -o hello hello.c\n ```\n• Pro-Tip: Strive for \"zero-warning\" code. Treat warnings as errors that need to be fixed. Adopt this habit from day one."
+ },
+ {
+  "page": 49,
+  "content": "Exercise: Compile and Run Our Program\n• Let's do it ourselves!\n 1. Open VS Code and find the \"age calculator\" program we wrote.\n 2. Open the integrated terminal (View > Terminal or `Ctrl+``).\n 3. Enter the compilation command:\n  ```bash\n  # Assuming your file is named age_calculator.c\n  gcc -Wall -o age_calculator age_calculator.c\n  ```\n 4. Check the result: If no text appears, compilation was successful! Use `ls` (Linux/macOS) or `dir` (Windows) to see the new executable file.\n 5. Run the program:\n  ```bash\n  ./age_calculator\n  ```"
+ },
+ {
+  "page": 50,
+  "content": "When Compilation Goes Wrong...\n• Errors are your friends, not your enemies!\n• Fact: Nobody writes perfect code on the first try. Compilation errors are a normal and expected part of programming.\n• The compiler's error messages are extremely precise and are designed to help you find and fix your mistakes."
+ },
+ {
+  "page": 51,
+  "content": "Anatomy of a GCC Error Message\n• Format: `filename:line:column: error: description`\n• Example (code with a missing semicolon):\n ```c\n // a.c\n #include <stdio.h>\n int main() {\n    printf(\"Hello\") // Missing semicolon\n    return 0;\n }\n ```\n• Error Output:\n ```\n a.c: In function ‘main’:\n a.c:4:20: error: expected ‘;’ before ‘return’\n ```\n• Breakdown:\n – `a.c:4:20`: The error is in the file `a.c`, on line 4, around column 20.\n – `error: expected ‘;’ before ‘return’`: The compiler expected a semicolon before it saw the `return` keyword."
+ },
+ {
+  "page": 52,
+  "content": "Common Error #1: Missing Semicolon\n• The most common beginner mistake.\n• Symptom: You will see an error message like `error: expected ‘;’ before ...`\n• How to Fix: Look at the line *before* the one indicated in the error message. That's usually where the semicolon is missing."
+ },
+ {
+  "page": 53,
+  "content": "Common Error #2: Variable Name Typo\n• Symptom: `error: ‘variable_name’ undeclared (first use in this function)`\n• Example Code:\n ```c\n int student_age = 20;\n printf(\"%d\", studnet_age); // Typo here\n ```\n• Meaning: The compiler is telling you, \"You're trying to use a variable named `studnet_age`, but I have no record of you ever declaring it.\"\n• How to Fix: Carefully check the spelling and case of your variable names to ensure they match their declaration."
+ },
+ {
+  "page": 54,
+  "content": "Strategy for Debugging Compilation Errors\n• A Four-Step Process:\n 1. Focus on the First Error Only: A single mistake can cause a cascade of subsequent errors. Fixing the first one often clears up many others.\n 2. Read the Error Message Carefully: Understand what the compiler is telling you. It gives you the file, line number, and a description.\n 3. Locate and Fix the Code: Go to the specified line and apply the fix.\n 4. Recompile: Repeat the process until you have zero errors and zero warnings.\n• What if you don't understand the error? Copy and paste it into Google. Someone has solved it before."
+ },
+ {
+  "page": 55,
+  "content": "Week 1 Summary\n• What You Learned Today:\n 1. From Python to C: Understood the core differences between interpreted vs. compiled, dynamic vs. static typing.\n 2. C Fundamentals: Mastered `#include`, `main`, the four basic data types (`int`, `float`, `double`, `char`), and I/O with `printf` and `scanf`.\n 3. The Compilation Pipeline: Learned how code is transformed by the preprocessor, compiler, assembler, and linker into an executable.\n 4. GCC Basics: Learned to compile programs using `gcc -Wall -o output source.c`.\n 5. Error Debugging: Gained the skill to read and fix basic compilation errors.\n• Congratulations, you've taken the first step to becoming a systems programmer!"
+ }
 ]

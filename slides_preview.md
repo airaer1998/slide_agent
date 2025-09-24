@@ -4,61 +4,64 @@ layout: content
 aspect_ratio: "16:9"
 ---
 
-@(layout=centered, background-color=#0d1117)
+@(layout=centered, background-color=#0d47a1, color=white)
 
-# Transitioning from Python to C  
-**Foundations for Systems & AI**
+# **Computer Systems: From Programming to Hardware**  
+## *An Introductory Course for AI Students*
 
----
-
-## Learning Objectives
-1. Articulate core differences between **interpreted (Python)** and **compiled (C)** execution  
-2. Write, compile, and run a minimal *Hello, World!* C program with `gcc`  
-3. Declare variables with explicit static types: `int`, `float`, `double`, `char`  
-4. Use `printf` / `scanf` for basic I/O and debug with `printf`  
-5. Trace the four-stage compilation pipeline: *preprocess → compile → assemble → link*
+### **Part 1: Course Introduction**  
+**Week 1, Lecture 1: First Steps in C**  
 
 ---
 
-## Course Map
-<->  
-**Session 1 (200 min)**  
-Basics: syntax, types, I/O, compilation  
+#### **Presenter: [Your Name]**  
+*Department of Computer Science*  
+*AI & Systems Lab*
 
-**Session 2 (200 min)**  
-Control structures & functions
-
----
-
-## Assessment
-- Weekly checkpoint quiz  
-- 5 × Python → C conversions  
-- Calculator mini-project
-
----
-
-!!! warning
-Install **GCC or Clang** + **VS Code** (C/C++ extension) before next class.
-
----
-
-@layout=left-title
-# Why Learn C for<br>Computer Systems & AI/ML?
-
-===
-
-## Systems Perspective
-- C maps closely to hardware  
-  `pointers = addresses`, `structs = memory layouts`
-- OS kernels, embedded firmware, high-performance libs (BLAS, OpenCV) written in C
-
-## AI/ML Connection
-- TensorFlow Lite Micro runs on C++ (subset of C)
-- Optimize Python extensions by understanding memory & cache (NumPy backend)
-
-## Career Edge
-- Device drivers, GPU kernels, real-time robotics demand C mastery
+## 👋 Instructor: [Your Name]
 
 <->
 
-![stack-diagram](resources/c-vs-python-stack.png)
+### 🎓 Background  
+AI & Systems Engineering
+
+### ❤️ Passion  
+Exploring how **software** runs efficiently on **underlying hardware**.
+
+### 🎯 Commitment  
+Make abstract concepts ==concrete & practical==, so you master core systems knowledge **without fear**.
+
+---
+
+### 🚀 Our Journey  
+We start from familiar `Python` and embark on a **deep-dive exploration** into the heart of computer systems.
+
+---
+
+@(layout=centered, background-color=slate-900, color=white)
+
+# Course Philosophy
+## Connecting AI Applications to Low-Level Hardware
+
+---
+
+<->
+
+### 🎯 Our Goal
+Build a *solid bridge* between **high-level applications** and the **hardware they run on**.
+
+===  
+
+### 🌉 Visual Metaphor  
+> A bridge labeled **"Computer Systems"**  
+> linking a ☁️ *cloud* *(Python/AI Apps)*  
+> to a 🔩 *silicon wafer* *(CPU/Memory/Hardware)*  
+
+---
+
+### The Path
+
+1. **Start** – High-level Python programming  
+2. **Journey** – Discover what happens beneath your code  
+3. **Method** – Hands-on, practical examples over dense theory  
+4. **Destination** – Parallel computing to accelerate your AI applications
